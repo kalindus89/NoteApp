@@ -52,7 +52,7 @@
                     android:gravity="right"
                     android:text="Don't Worry We Are Here"
                     android:textStyle="bold"
-                    android:textColor="#F3CB69"
+                    android:textColor="#DAE80C"
                     android:textSize="17sp"></TextView>
 
             </LinearLayout>

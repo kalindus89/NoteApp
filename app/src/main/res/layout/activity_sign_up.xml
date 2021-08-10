@@ -52,7 +52,7 @@
                     android:gravity="right"
                     android:text="Sign Up"
                     android:textStyle="bold"
-                    android:textColor="#F3CB69"
+                    android:textColor="#F41D36"
                     android:textSize="17sp"></TextView>
 
             </LinearLayout>
