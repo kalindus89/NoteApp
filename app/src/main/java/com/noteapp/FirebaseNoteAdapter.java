@@ -1,6 +1,7 @@
 package com.noteapp;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +19,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import java.util.Random;
 
-public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,FirebaseNoteAdapter.NoteViewHolder> {
+public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,FirebaseNoteAdapter.NoteViewHolder2> {
     /**
      * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
      * FirestoreRecyclerOptions} for configuration options.
@@ -27,9 +29,8 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
     public FirebaseNoteAdapter(@NonNull FirestoreRecyclerOptions<FirebaseModel> options) {
         super(options);
     }
-
     @Override
-    protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull FirebaseModel model) {
+    protected void onBindViewHolder(@NonNull NoteViewHolder2 holder, int position, @NonNull FirebaseModel model) {
 
         holder.mTitle.setText(model.getTitle());
         holder.noteContent.setText(model.getContent());
@@ -41,17 +42,17 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
 
     @NonNull
     @Override
-    public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NoteViewHolder2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_item_layout,parent,false);
-        return new NoteViewHolder(view);
+        return new NoteViewHolder2(view);
     }
 
 
-    public class NoteViewHolder extends RecyclerView.ViewHolder {
+    public class NoteViewHolder2 extends RecyclerView.ViewHolder {
        private TextView mTitle,noteContent;
         CardView noteCard;
 
-        public NoteViewHolder(@NonNull View itemView) {
+        public NoteViewHolder2(@NonNull View itemView) {
             super(itemView);
 
             mTitle =itemView.findViewById(R.id.noteTitle);
