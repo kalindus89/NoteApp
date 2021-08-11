@@ -33,8 +33,8 @@ public class NotesActivity extends AppCompatActivity {
     StaggeredGridLayoutManager staggeredGridLayoutManager;
     FloatingActionButton createNoteFab;
 
-    FirestoreRecyclerAdapter<FirebaseModel, NoteViewHolder> noteAdapter;
-
+    //FirestoreRecyclerAdapter<FirebaseModel, NoteViewHolder> noteAdapter;
+    FirebaseNoteAdapter noteAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +60,8 @@ public class NotesActivity extends AppCompatActivity {
         Query query =firebaseFirestore.collection("Notes").document(firebaseUser.getUid()).collection("MyNotes").orderBy("title",Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<FirebaseModel> allUserNotes= new FirestoreRecyclerOptions.Builder<FirebaseModel>().setQuery(query,FirebaseModel.class).build();
-        noteAdapter= new FirestoreRecyclerAdapter<FirebaseModel, NoteViewHolder>(allUserNotes) {
-            @Override
-            protected void onBindViewHolder(@NonNull NoteViewHolder holder, int position, @NonNull FirebaseModel model) {
 
-                holder.mTitle.setText(model.getTitle());
-                holder.noteContent.setText(model.getContent());
-
-            }
-
-            @NonNull
-            @Override
-            public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notes_item_layout,parent,false);
-                return new NoteViewHolder(view);
-            }
-        };
-
+        noteAdapter= new FirebaseNoteAdapter(allUserNotes);
         recyclerView.setHasFixedSize(true);
         staggeredGridLayoutManager= new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -102,20 +86,6 @@ public class NotesActivity extends AppCompatActivity {
                 finish();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public class NoteViewHolder extends RecyclerView.ViewHolder{
-
-       private TextView mTitle,noteContent;
-       LinearLayout mNotes;
-
-        public NoteViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mTitle =itemView.findViewById(R.id.noteTitle);
-            noteContent = itemView.findViewById(R.id.noteContent);
-            mNotes = itemView.findViewById(R.id.note);
-        }
     }
 
     @Override
