@@ -36,7 +36,7 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
 
         Random rnd = new Random();
         int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-        holder.noteCard.setBackgroundColor(color);
+        holder.noteCard.setCardBackgroundColor(color);
     }
 
     @NonNull
