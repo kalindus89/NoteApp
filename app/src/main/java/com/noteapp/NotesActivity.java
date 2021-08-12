@@ -58,34 +58,23 @@ public class NotesActivity extends AppCompatActivity {
             }
         });
 
+        syncDataFromFirebase();
+
+    }
+
+
+    public void syncDataFromFirebase(){
         Query query = firebaseFirestore.collection("Notes").document(firebaseUser.getUid()).collection("MyNotes").orderBy("title", Query.Direction.ASCENDING);
 
         FirestoreRecyclerOptions<FirebaseModel> allUserNotes = new FirestoreRecyclerOptions.Builder<FirebaseModel>().setQuery(query, FirebaseModel.class).build();
 
-        noteAdapter = new FirebaseNoteAdapter(allUserNotes);
+        noteAdapter = new FirebaseNoteAdapter(allUserNotes,this);
         recyclerView.setHasFixedSize(true);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager); // this will crash when back press
         //recyclerView.setLayoutManager(new WrapContentStaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         recyclerView.setAdapter(noteAdapter);
     }
-
-/*    public class WrapContentStaggeredGridLayoutManager extends StaggeredGridLayoutManager {
-
-        public WrapContentStaggeredGridLayoutManager(int spanCount, int orientation) {
-            super(spanCount, orientation);
-        }
-
-        @Override
-        public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
-            try {
-                super.onLayoutChildren(recycler, state);
-            } catch (IndexOutOfBoundsException e) {
-                //Log.e("TAG", "meet a IOOBE in RecyclerView");
-                System.out.println("aaaaaaa error");
-            }
-        }
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -108,9 +97,8 @@ public class NotesActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         noteAdapter.startListening();
-
+        recyclerView.setAdapter(noteAdapter);
     }
 
     @Override
@@ -119,7 +107,8 @@ public class NotesActivity extends AppCompatActivity {
 
         if(noteAdapter!=null)
         {
-            noteAdapter.startListening();
+           noteAdapter.stopListening();
+            //noteAdapter.startListening();
         }
     }
 }

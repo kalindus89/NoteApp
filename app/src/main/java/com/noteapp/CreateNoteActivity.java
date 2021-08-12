@@ -81,7 +81,7 @@ public class CreateNoteActivity extends AppCompatActivity {
                             msaveeditnote.setEnabled(true);
 
                             Toast.makeText(getApplicationContext(), "Note Created Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(CreateNoteActivity.this,NotesActivity.class));
+                            //startActivity(new Intent(CreateNoteActivity.this,NotesActivity.class));
                             finish();
                         }
                     }).addOnFailureListener(new OnFailureListener() {
