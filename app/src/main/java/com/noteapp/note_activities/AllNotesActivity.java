@@ -22,7 +22,7 @@ import com.noteapp.FirebaseNoteAdapter;
 import com.noteapp.login_signup.LoginActivity;
 import com.noteapp.R;
 
-public class NotesActivity extends AppCompatActivity {
+public class AllNotesActivity extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     FirebaseFirestore firebaseFirestore;
@@ -51,7 +51,7 @@ public class NotesActivity extends AppCompatActivity {
         createNoteFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotesActivity.this, CreateNoteActivity.class));
+                startActivity(new Intent(AllNotesActivity.this, CreateNoteActivity.class));
             }
         });
 
@@ -85,7 +85,7 @@ public class NotesActivity extends AppCompatActivity {
 
             case R.id.logOut:
                 firebaseAuth.signOut();
-                startActivity(new Intent(NotesActivity.this, LoginActivity.class));
+                startActivity(new Intent(AllNotesActivity.this, LoginActivity.class));
                 finish();
         }
         return super.onOptionsItemSelected(item);

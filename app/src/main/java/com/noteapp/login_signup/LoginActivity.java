@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.noteapp.R;
-import com.noteapp.note_activities.NotesActivity;
+import com.noteapp.note_activities.AllNotesActivity;
 
  public class LoginActivity extends AppCompatActivity {
 
@@ -53,7 +53,7 @@ import com.noteapp.note_activities.NotesActivity;
 
         if(firebaseUser !=null){
 
-            Intent intent = new Intent(LoginActivity.this, NotesActivity.class);
+            Intent intent = new Intent(LoginActivity.this, AllNotesActivity.class);
             startActivity(intent);
             finish();
 
@@ -126,7 +126,7 @@ import com.noteapp.note_activities.NotesActivity;
 
              Toast.makeText(getApplicationContext(), "Logged In", Toast.LENGTH_SHORT).show();
 
-             Intent intent = new Intent(LoginActivity.this, NotesActivity.class);
+             Intent intent = new Intent(LoginActivity.this, AllNotesActivity.class);
              startActivity(intent);
              finish();
          }

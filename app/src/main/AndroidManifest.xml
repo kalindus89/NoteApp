@@ -20,7 +20,7 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".note_activities.NotesActivity"
+            android:name=".note_activities.AllNotesActivity"
             android:exported="true" />
         <activity
             android:name=".login_signup.ForgotPassword"
