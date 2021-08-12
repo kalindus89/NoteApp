@@ -1,8 +1,10 @@
-package com.noteapp;
+package com.noteapp.note_activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.noteapp.R;
 
 public class NoteShowDetails extends AppCompatActivity {
 

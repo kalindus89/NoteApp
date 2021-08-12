@@ -10,26 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NoteApp">
         <activity
-            android:name=".NoteShowDetails"
+            android:name=".note_activities.NoteShowDetails"
             android:exported="true" />
         <activity
-            android:name=".EditNoteActivity"
+            android:name=".note_activities.EditNoteActivity"
             android:exported="true" />
         <activity
-            android:name=".CreateNoteActivity"
+            android:name=".note_activities.CreateNoteActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
-            android:name=".NotesActivity"
+            android:name=".note_activities.NotesActivity"
             android:exported="true" />
         <activity
-            android:name=".ForgotPassword"
+            android:name=".login_signup.ForgotPassword"
             android:exported="true" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".login_signup.SignUpActivity"
             android:exported="true" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login_signup.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

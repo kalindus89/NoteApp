@@ -1,4 +1,4 @@
- package com.noteapp;
+ package com.noteapp.login_signup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.noteapp.R;
+import com.noteapp.note_activities.NotesActivity;
 
  public class LoginActivity extends AppCompatActivity {
 
