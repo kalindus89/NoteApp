@@ -11,14 +11,16 @@
         android:theme="@style/Theme.NoteApp">
         <activity
             android:name=".note_activities.NoteShowDetails"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.NoteAppNoActionBar" />
         <activity
             android:name=".note_activities.EditNoteActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.NoteAppNoActionBar" />
         <activity
             android:name=".note_activities.CreateNoteActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.NoteAppNoActionBar"/>
         <activity
             android:name=".note_activities.AllNotesActivity"
             android:exported="true" />
