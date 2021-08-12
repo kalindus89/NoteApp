@@ -21,6 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.noteapp.note_activities.EditNoteActivity;
 import com.noteapp.note_activities.NoteShowDetails;
 
@@ -34,14 +39,15 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
      * @param options
      */
     Context context;
-
-    public FirebaseNoteAdapter(@NonNull FirestoreRecyclerOptions<FirebaseModel> options, Context context) {
-        super(options);
+    FirestoreRecyclerOptions<FirebaseModel> fireStoreRecyclerOptions;
+    FirebaseUser firebaseUser;
+    FirebaseFirestore firebaseFirestore;
+    public FirebaseNoteAdapter(Context context, @NonNull FirestoreRecyclerOptions<FirebaseModel> fireStoreRecyclerOptions, FirebaseFirestore firebaseFirestore, FirebaseUser firebaseUser) {
+        super(fireStoreRecyclerOptions);
         this.context = context;
-    }
-
-    public FirebaseNoteAdapter(@NonNull FirestoreRecyclerOptions<FirebaseModel> options) {
-        super(options);
+        this.fireStoreRecyclerOptions = fireStoreRecyclerOptions;
+        this.firebaseUser = firebaseUser;
+        this.firebaseFirestore = firebaseFirestore;
     }
     @Override
     protected void onBindViewHolder(@NonNull NoteViewHolder2 holder, int position, @NonNull FirebaseModel model) {
@@ -56,7 +62,11 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, NoteShowDetails.class));
+                Intent intent=new Intent(context, NoteShowDetails.class);
+                intent.putExtra("title",model.getTitle());
+                intent.putExtra("content",model.getContent());
+                intent.putExtra("noteUniqueId",fireStoreRecyclerOptions.getSnapshots().getSnapshot(holder.getAbsoluteAdapterPosition()).getId());
+                context.startActivity(intent);
             }
         });
 
@@ -69,14 +79,34 @@ public class FirebaseNoteAdapter extends FirestoreRecyclerAdapter<FirebaseModel,
                 popupMenu.getMenu().add("Edit").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        context.startActivity(new Intent(context, EditNoteActivity.class));
+
+                        Intent intent=new Intent(context, EditNoteActivity.class);
+                        intent.putExtra("title",model.getTitle());
+                        intent.putExtra("content",model.getContent());
+                        intent.putExtra("noteUniqueId",fireStoreRecyclerOptions.getSnapshots().getSnapshot(holder.getAbsoluteAdapterPosition()).getId());
+                        context.startActivity(intent);
                         return false;
                     }
                 });
                 popupMenu.getMenu().add("Delete").setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(context, model.getTitle()+" item Deleted", Toast.LENGTH_SHORT).show();
+
+                        DocumentReference documentReference = firebaseFirestore.collection("Notes").document(firebaseUser.getUid()).collection("MyNotes").document(fireStoreRecyclerOptions.getSnapshots().getSnapshot(holder.getAbsoluteAdapterPosition()).getId());
+                        documentReference.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(context, model.getTitle()+" Item Deleted", Toast.LENGTH_SHORT).show();
+                                popupMenu.dismiss();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, model.getTitle()+" Item failed Deleted ", Toast.LENGTH_SHORT).show();
+                                popupMenu.dismiss();
+                            }
+                        });
+
                         return false;
                     }
                 });

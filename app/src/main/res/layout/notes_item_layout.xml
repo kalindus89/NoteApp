@@ -9,10 +9,12 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/noteCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         app:cardBackgroundColor="@color/teal_700"
         app:cardCornerRadius="15dp"
         android:layout_margin="2dp"
+        android:ellipsize="end"
+        android:maxLines="3"
         android:padding="10dp">
 
 
@@ -68,6 +70,20 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp"
+            android:layout_gravity="bottom|right"
+            android:gravity="right"
+            android:textStyle="italic|bold"
+            android:text="See More.."
+            android:textColor="@color/white"
+            android:textSize="12sp" />
     </com.google.android.material.card.MaterialCardView>
 
 

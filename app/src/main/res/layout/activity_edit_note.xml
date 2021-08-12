@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8F7BB"
     tools:context=".note_activities.CreateNoteActivity">
 
 
@@ -11,7 +12,7 @@
         android:id="@+id/toolbarofcreatenote"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white">
+        android:background="@color/teal_700">
 
         <EditText
             android:id="@+id/editTitleOfNote"
@@ -25,20 +26,21 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <EditText
-        android:id="@+id/editContentOfNote"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbarofcreatenote"
-        android:background="#faf7f7"
-        android:gravity="top|left"
-        android:hint="Edit your note content here"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
+        <EditText
+            android:id="@+id/editContentOfNote"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbarofcreatenote"
+            android:layout_marginTop="-1dp"
+            android:background="#F8F7BB"
+            android:focusable="true"
+            android:gravity="top|left"
+            android:hint="Edit your note content here"
+            android:padding="15dp"
+            android:textSize="15sp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/saveNote"
+        android:id="@+id/updateNote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -47,15 +49,13 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="30dp"
         android:src="@drawable/save"
-        app:maxImageSize="56dp"/>
-
+        app:maxImageSize="56dp" />
     <ProgressBar
         android:id="@+id/progressbarOfCreateNote"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_centerInParent="true"
         android:layout_marginTop="10dp"
-        android:visibility="gone">
-    </ProgressBar>
+        android:visibility="gone"></ProgressBar>
 
 </RelativeLayout>

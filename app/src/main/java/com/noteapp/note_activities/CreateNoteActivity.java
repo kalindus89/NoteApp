@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,8 +50,8 @@ public class CreateNoteActivity extends AppCompatActivity {
 
         Toolbar toolbar=findViewById(R.id.toolbarofcreatenote);
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP); // actionBar back button color
 
         firebaseAuth=FirebaseAuth.getInstance();
         firebaseFirestore =FirebaseFirestore.getInstance();

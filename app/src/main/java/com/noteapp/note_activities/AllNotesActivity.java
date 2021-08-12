@@ -65,7 +65,7 @@ public class AllNotesActivity extends AppCompatActivity {
 
         FirestoreRecyclerOptions<FirebaseModel> allUserNotes = new FirestoreRecyclerOptions.Builder<FirebaseModel>().setQuery(query, FirebaseModel.class).build();
 
-        noteAdapter = new FirebaseNoteAdapter(allUserNotes,this);
+        noteAdapter = new FirebaseNoteAdapter(this,allUserNotes,firebaseFirestore,firebaseUser);
         recyclerView.setHasFixedSize(true);
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(staggeredGridLayoutManager); // this will crash when back press
