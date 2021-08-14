@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -40,6 +41,8 @@ public class NoteShowDetails extends AppCompatActivity {
 
         titleOfNote.setText(title);
         contentOfNote.setText(content);
+
+        contentOfNote.setTextIsSelectable(true); // enable to select text to copy
 
         editNote.setOnClickListener(new View.OnClickListener() {
             @Override
